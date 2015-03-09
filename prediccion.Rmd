@@ -1,0 +1,43 @@
+---
+title: "Predicción"
+author: "Jimena Gonzalez"
+date: "March 9, 2015"
+output: html_document
+---
+
+
+```{r}
+# Cargar paquetes
+library(knitr) 
+library(ggplot2)
+library(RColorBrewer)
+library(Quandl)
+
+```
+
+```{r}
+# load data
+Quandl.auth("yourauthenticationtoken")
+mydata= Quandl("BNP/USDCOP", start_date="2000-01-01", end_date="2015-02-23")
+head(mydata,n=5)
+str(mydata)
+```
+
+Graficas:
+```{r}
+columnas <- c("Date","USD/COP")
+x<- droplevels(subset(mydata, USD/COP %in% columnas))
+ggplot(x,aes(x=data),y=USD/COP)+geom_line() + geom_point()
+``` 
+
+```{r}
+#jCountries <- c("Data", "USD/COP", "Argentina", "Brazil", "China", "Nigeria")
+#x <- droplevels(subset(gDat, country %in% jCountries))
+#ggplot(x, aes(x = year, y = lifeExp, color = country)) +
+#  geom_line() + geom_point()
+``` 
+
+
+
+
+
